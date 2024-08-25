@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Value Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            border-width: 2px black;
+            width: 600px;
+            height: 300px;
+            margin-top: 150px;
+            margin-left: 400px;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color:rgb(248, 248, 173);
+            position: relative; /* Allows for absolute positioning of the button */
+        }
+        input[type="number"] {
+            width: calc(50% - 10px);
+            border-radius: 17px;
+            padding: 8px;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            position: absolute; /* Position it absolutely */
+            right: 30px; /* Align to the right edge of the container */
+            bottom: 250px; /* Adjust the distance from the bottom as needed */
+            border-radius: 15px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        textarea {
+            border-radius: 10px;
+            background-color: aquamarine;
+            width: 100%;
+            height: 40px;
+            margin-top: 10px;
+            padding: 8px;
+            font-size: 16px;
+            resize: none; /* Disable resizing */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box1">
+            <input type="number" id="minValue" placeholder="Min Value">
+        </div>
+        <br>
+        <br>
+        <div class="box2">
+            <input type="number" id="maxValue" placeholder="Max Value">
+        </div>
+        <br>
+        <br>
+
+        <button id="generateBtn">Submit</button>
+        <br>
+        <br>
+        <div>
+            <textarea id="resultArea" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            // Get the values from the inputs
+            const minValue = parseFloat(document.getElementById('minValue').value);
+            const maxValue = parseFloat(document.getElementById('maxValue').value);
+            
+            // Check if the values are valid numbers and minValue is less than or equal to maxValue
+            if (isNaN(minValue) || isNaN(maxValue) || minValue > maxValue) {
+                document.getElementById('resultArea').value = 'Please enter valid numbers where Min Value is less than or equal to Max Value.';
+                return;
+            }
+            
+            // Generate a random number between minValue and maxValue
+            const randomValue = Math.random() * (maxValue - minValue) + minValue;
+            
+            // Display the result
+            document.getElementById('resultArea').value = `Random Value: ${randomValue.toFixed(2)}`;
+        });
+    </script>
+
+</body>
+</html>
